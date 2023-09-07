@@ -1,0 +1,29 @@
+{
+    "name": "sarahman/sms-service-with-bd-providers",
+    "description": "SMS Gateway service library in PHP. Multiple providers of Bangladesh in one library",
+    "keywords": ["sms", "gateway", "service", "providers", "framework", "laravel", "lumen"],
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Syed Abidur Rahman",
+            "email": "aabid048@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sarahman\\SmsService\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
