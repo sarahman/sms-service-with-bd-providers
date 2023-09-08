@@ -13,6 +13,15 @@
             "email": "aabid048@gmail.com"
         }
     ],
+    "provide": {
+        "psr/http-message-implementation": "1.0"
+    },
+    "require": {
+        "php": ">=5.5.34",
+        "ext-curl": "*",
+        "illuminate/config": "^4.0",
+        "illuminate/support": "^4.0"
+    },
     "autoload": {
         "psr-4": {
             "Sarahman\\SmsService\\": "src/"
