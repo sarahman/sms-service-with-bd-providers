@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Exception;
 use Illuminate\Support\Facades\Config;
 use PHPUnit_Framework_TestCase;
 use Sarahman\SmsService\Client;
@@ -21,12 +22,33 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_checks_default_sms_provider()
     {
         $provider = Client::getProvider();
 
         $this->assertInstanceOf(Ssl::class, $provider);
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function it_checks_the_provided_sms_provider_to_be_valid()
+    {
+        $provider = Client::getProvider(Client::PROVIDER_SSL);
+
+        $this->assertInstanceOf(Ssl::class, $provider);
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function it_checks_the_provided_sms_provider_to_be_invalid()
+    {
+        $this->setExpectedException(Exception::class, 'Invalid SMS provider name is given.');
+        Client::getProvider(Client::PROVIDER_SSL . '2');
     }
 }
