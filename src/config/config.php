@@ -20,6 +20,13 @@ return [
             'api_key' => '',
             'type' => 'text',
         ],
+        Client::PROVIDER_BOOM_CAST => [
+            'url' => 'http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php',
+            'userName' => '',
+            'password' => '',
+            'MsgType' => 'TEXT',
+            'masking' => 'S.H.P.L',
+        ],
         Client::PROVIDER_SSL => [
             'url' => 'http://sms.sslwireless.com/pushapi',
             'user' => '',

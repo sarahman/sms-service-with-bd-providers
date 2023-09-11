@@ -12,6 +12,7 @@ class Client
 {
     const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
+    const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
     const PROVIDER_SSL = Providers\Ssl::class;
 
     private $provider;
@@ -26,6 +27,7 @@ class Client
         switch ($providerName) {
             case self::PROVIDER_BANGLALINK:
             case self::PROVIDER_BD_WEB_HOST_24:
+            case self::PROVIDER_BOOM_CAST:
             case self::PROVIDER_SSL:
                 return new $providerName($config, $url);
 
