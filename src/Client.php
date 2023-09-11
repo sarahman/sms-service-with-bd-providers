@@ -10,6 +10,7 @@ use Sarahman\SmsService\Providers;
 
 class Client
 {
+    const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_SSL = Providers\Ssl::class;
 
     private $provider;
@@ -22,6 +23,7 @@ class Client
     public static function getProvider($providerName = self::PROVIDER_SSL, array $config = [], $url = null)
     {
         switch ($providerName) {
+            case self::PROVIDER_BANGLALINK:
             case self::PROVIDER_SSL:
                 return new $providerName($config, $url);
 
