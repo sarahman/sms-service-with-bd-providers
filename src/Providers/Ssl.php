@@ -20,8 +20,8 @@ class Ssl extends BaseProvider
 
     public function mapParams($recipient, $message, array $params = [])
     {
-        if (!preg_match('/^(00|\+)?(8{2})?0?([0-9]{10})$/i', $recipient, $matches)) {
-            return false;
+        if (!preg_match($this->recipientPattern, $recipient, $matches)) {
+            return [];
         }
 
         $recipient = '880' . $matches[3];

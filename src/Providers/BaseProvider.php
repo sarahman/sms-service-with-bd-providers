@@ -10,6 +10,7 @@ abstract class BaseProvider implements ProviderInterface
     protected $configName;
     protected $config;
     protected $url;
+    protected $recipientPattern = '/^(00|\+)?(8{2})?0?([0-9]{10})$/i';
 
     public function __construct(array $config = [], $url = null)
     {
