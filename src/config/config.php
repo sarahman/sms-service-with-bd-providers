@@ -27,6 +27,16 @@ return [
             'MsgType' => 'TEXT',
             'masking' => 'S.H.P.L',
         ],
+        Client::PROVIDER_GRAMEENPHONE => [
+            'url' => 'https://cmp.grameenphone.com/gpcmpapi/messageplatform/controller.home',
+            'username' => '',
+            'password' => '',
+            'countrycode' => '880',
+            'cli' => '',
+            'apicode' => 1,
+            'messagetype' => 1, // 1: Text; 2: Flash; 3: Unicode (Bangla)
+            'messageid' => 0,
+        ],
         Client::PROVIDER_SSL => [
             'url' => 'http://sms.sslwireless.com/pushapi',
             'user' => '',

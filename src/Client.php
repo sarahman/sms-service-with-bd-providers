@@ -13,6 +13,7 @@ class Client
     const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
+    const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
     const PROVIDER_SSL = Providers\Ssl::class;
 
     private $provider;
@@ -28,6 +29,7 @@ class Client
             case self::PROVIDER_BANGLALINK:
             case self::PROVIDER_BD_WEB_HOST_24:
             case self::PROVIDER_BOOM_CAST:
+            case self::PROVIDER_GRAMEENPHONE:
             case self::PROVIDER_SSL:
                 return new $providerName($config, $url);
 
@@ -144,12 +146,28 @@ class Client
 
     private function prepareCurlOptions(array $data)
     {
-        return [
+        $options = [
             'url' => $this->provider->getUrl(),
-            'post' => count($data),
-            'postfields' => http_build_query($data),
             'timeout' => 30,
         ];
+
+        switch(get_class($this->provider)) {
+            case self::PROVIDER_GRAMEENPHONE:
+                $options += [
+                    'httpheader' => ['Content-Type: application/json'],
+                    'post' => 1,
+                    'postfields' => json_encode($data),
+                ];
+                break;
+
+            default:
+                $options += [
+                    'post' => count($data),
+                    'postfields' => http_build_query($data),
+                ];
+        }
+
+        return $options;
     }
 
     private function executeWithCurl(array $options, $withHttpStatus = false)
