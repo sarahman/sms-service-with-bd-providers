@@ -5,6 +5,7 @@ namespace Sarahman\SmsService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
 use Sarahman\SmsService\Interfaces\ProviderInterface;
 use Sarahman\SmsService\Providers;
 
@@ -17,6 +18,7 @@ class Client
     const PROVIDER_PAYSTATION = Providers\Paystation::class;
     const PROVIDER_ROBI = Providers\Robi::class;
     const PROVIDER_SSL = Providers\Ssl::class;
+    const PROVIDER_VALUE_FIRST = Providers\ValueFirst::class;
 
     private $provider;
 
@@ -35,6 +37,7 @@ class Client
             case self::PROVIDER_PAYSTATION:
             case self::PROVIDER_ROBI:
             case self::PROVIDER_SSL:
+            case self::PROVIDER_VALUE_FIRST:
                 return new $providerName($config, $url);
 
             default:
@@ -182,6 +185,10 @@ class Client
                     'post' => count($data),
                     'postfields' => http_build_query($data),
                 ];
+        }
+
+        if ($this->provider instanceof NeedsAuthenticationInterface) {
+            $options['httpheader'][] = 'Authorization: Bearer ' . $this->provider->getAccessToken();
         }
 
         return $options;

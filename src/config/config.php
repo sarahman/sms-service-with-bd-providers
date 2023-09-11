@@ -55,5 +55,12 @@ return [
             'pass' => '',
             'sid' => '',
         ],
+        Client::PROVIDER_VALUE_FIRST => [
+            'url' => 'http://www.myvaluefirst.com/smpp/sendsms',
+            'username' => '',
+            'password' => '',
+            'from' => '',
+            'coding' => 3, // Unicode allows or not
+        ],
     ],
 ];
