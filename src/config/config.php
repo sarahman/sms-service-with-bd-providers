@@ -37,6 +37,12 @@ return [
             'messagetype' => 1, // 1: Text; 2: Flash; 3: Unicode (Bangla)
             'messageid' => 0,
         ],
+        Client::PROVIDER_PAYSTATION => [
+            'url' => 'https://sms.shl.com.bd/sendsms',
+            'user_id' => '',
+            'password' => '',
+            'type' => 'text',
+        ],
         Client::PROVIDER_SSL => [
             'url' => 'http://sms.sslwireless.com/pushapi',
             'user' => '',

@@ -14,6 +14,7 @@ class Client
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
     const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
+    const PROVIDER_PAYSTATION = Providers\Paystation::class;
     const PROVIDER_SSL = Providers\Ssl::class;
 
     private $provider;
@@ -30,6 +31,7 @@ class Client
             case self::PROVIDER_BD_WEB_HOST_24:
             case self::PROVIDER_BOOM_CAST:
             case self::PROVIDER_GRAMEENPHONE:
+            case self::PROVIDER_PAYSTATION:
             case self::PROVIDER_SSL:
                 return new $providerName($config, $url);
 
@@ -155,6 +157,19 @@ class Client
             case self::PROVIDER_GRAMEENPHONE:
                 $options += [
                     'httpheader' => ['Content-Type: application/json'],
+                    'post' => 1,
+                    'postfields' => json_encode($data),
+                ];
+                break;
+
+            case self::PROVIDER_PAYSTATION:
+                $options += [
+                    'httpheader' => [
+                        'Content-Type: application/json',
+                        'Accept: application/json',
+                        'user_id:' . $data['user_id'],
+                        'password:' . $data['password'],
+                    ],
                     'post' => 1,
                     'postfields' => json_encode($data),
                 ];
