@@ -43,6 +43,12 @@ return [
             'password' => '',
             'type' => 'text',
         ],
+        Client::PROVIDER_ROBI => [
+            'url' => 'https://bmpws.robi.com.bd/ApacheGearWS/SendTextMessage',
+            'Username' => '',
+            'Password' => '',
+            'From' => '',
+        ],
         Client::PROVIDER_SSL => [
             'url' => 'http://sms.sslwireless.com/pushapi',
             'user' => '',

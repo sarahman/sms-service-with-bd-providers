@@ -15,6 +15,7 @@ class Client
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
     const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
     const PROVIDER_PAYSTATION = Providers\Paystation::class;
+    const PROVIDER_ROBI = Providers\Robi::class;
     const PROVIDER_SSL = Providers\Ssl::class;
 
     private $provider;
@@ -32,6 +33,7 @@ class Client
             case self::PROVIDER_BOOM_CAST:
             case self::PROVIDER_GRAMEENPHONE:
             case self::PROVIDER_PAYSTATION:
+            case self::PROVIDER_ROBI:
             case self::PROVIDER_SSL:
                 return new $providerName($config, $url);
 
