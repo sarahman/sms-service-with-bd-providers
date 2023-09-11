@@ -14,6 +14,12 @@ return [
             'passwd' => '',
             'sender' => '',
         ],
+        Client::PROVIDER_BD_WEB_HOST_24 => [
+            'url' => 'http://sms.bdwebhost24.com/smsapi',
+            'senderid' => '',
+            'api_key' => '',
+            'type' => 'text',
+        ],
         Client::PROVIDER_SSL => [
             'url' => 'http://sms.sslwireless.com/pushapi',
             'user' => '',
