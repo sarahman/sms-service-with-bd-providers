@@ -14,6 +14,7 @@ class Client
     const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
+    const PROVIDER_ELITBUZZ = Providers\Elitbuzz::class;
     const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
     const PROVIDER_PAYSTATION = Providers\Paystation::class;
     const PROVIDER_ROBI = Providers\Robi::class;
@@ -27,12 +28,21 @@ class Client
         $this->provider = $provider;
     }
 
+    /**
+     * Return a SMS provider according to the given provider name.
+     *
+     * @param string $providerName
+     * @param array $config
+     * @param string $url
+     * @return ProviderInterface
+     */
     public static function getProvider($providerName = self::PROVIDER_SSL, array $config = [], $url = null)
     {
         switch ($providerName) {
             case self::PROVIDER_BANGLALINK:
             case self::PROVIDER_BD_WEB_HOST_24:
             case self::PROVIDER_BOOM_CAST:
+            case self::PROVIDER_ELITBUZZ:
             case self::PROVIDER_GRAMEENPHONE:
             case self::PROVIDER_PAYSTATION:
             case self::PROVIDER_ROBI:
