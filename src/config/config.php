@@ -43,6 +43,12 @@ return [
             'messagetype' => 1, // 1: Text; 2: Flash; 3: Unicode (Bangla)
             'messageid' => 0,
         ],
+        Client::PROVIDER_NOVOCOM => [
+            'url' => 'https://sms.novocom-bd.com/api/v2/SendSMS',
+            'ApiKey' => '',
+            'ClientId' => '',
+            'SenderId' => '',
+        ],
         Client::PROVIDER_PAYSTATION => [
             'url' => 'https://sms.shl.com.bd/sendsms',
             'user_id' => '',

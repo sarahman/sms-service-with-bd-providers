@@ -16,6 +16,7 @@ class Client
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
     const PROVIDER_ELITBUZZ = Providers\Elitbuzz::class;
     const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
+    const PROVIDER_NOVOCOM = Providers\Novocom::class;
     const PROVIDER_PAYSTATION = Providers\Paystation::class;
     const PROVIDER_ROBI = Providers\Robi::class;
     const PROVIDER_SSL = Providers\Ssl::class;
@@ -44,6 +45,7 @@ class Client
             case self::PROVIDER_BOOM_CAST:
             case self::PROVIDER_ELITBUZZ:
             case self::PROVIDER_GRAMEENPHONE:
+            case self::PROVIDER_NOVOCOM:
             case self::PROVIDER_PAYSTATION:
             case self::PROVIDER_ROBI:
             case self::PROVIDER_SSL:
@@ -170,6 +172,7 @@ class Client
 
         switch(get_class($this->provider)) {
             case self::PROVIDER_GRAMEENPHONE:
+            case self::PROVIDER_NOVOCOM:
                 $options += [
                     'httpheader' => ['Content-Type: application/json'],
                     'post' => 1,
