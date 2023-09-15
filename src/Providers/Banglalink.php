@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class Banglalink extends BaseProvider
 {
     public function getUsername()
@@ -37,9 +39,6 @@ class Banglalink extends BaseProvider
     {
         preg_match('/^(success count \: ([0-9])*) and (fail count \: ([0-9])*)/i', $response, $matches);
 
-        return [
-            'success' => is_array($matches) && array_key_exists(2, $matches) && $matches[2] == 1,
-            'response' => $response,
-        ];
+        return new Response(is_array($matches) && array_key_exists(2, $matches) && $matches[2] == 1, $response);
     }
 }

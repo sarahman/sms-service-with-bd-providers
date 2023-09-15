@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class BdWebHost24 extends BaseProvider
 {
     public function getUsername()
@@ -36,9 +38,8 @@ class BdWebHost24 extends BaseProvider
 
     public function parseResponse($response)
     {
-        return [
-            'success' => preg_match('/^SMS SUBMITTED\: ID \- .*$/i', $response),
-            'response' => $response,
-        ];
+        preg_match('/^SMS SUBMITTED\: ID \- .*$/i', $response, $matches);
+
+        return new Response(is_array($matches) && array_key_exists(0, $matches), $response);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class BoomCast extends BaseProvider
 {
     public function getUsername()
@@ -39,9 +41,6 @@ class BoomCast extends BaseProvider
     {
         $parsedResponse = json_decode($response);
 
-        return [
-            'success' => $parsedResponse[0]->success,
-            'response' => $response,
-        ];
+        return new Response($parsedResponse[0]->success, $response);
     }
 }

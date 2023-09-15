@@ -80,11 +80,11 @@ class Client
                 $options = $this->prepareCurlOptions($data);
                 $response = $this->provider->parseResponse($this->executeWithCurl($options));
 
-                if (!$response['success']) {
-                    throw new Exception($response['response'], 500);
+                if (!$response->getStatus()) {
+                    throw new Exception($response->getResponseString(), 500);
                 }
 
-                $log['sent'][$recipient] = $response;
+                $log['sent'][$recipient] = $response->toArray();
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
@@ -132,7 +132,7 @@ class Client
 
                 $response = $this->provider->parseResponse($response);
 
-                if (!$response['success']) {
+                if (!$response->getStatus()) {
                     //Resend sms
                     Log::info('SMS sending failed response!');
 
@@ -140,8 +140,8 @@ class Client
                         $response = $this->provider->parseResponse($this->executeWithCurl($options));
                         Log::info('Second try of sending SMS', $response);
 
-                        if (!$response['success']) {
-                            throw new Exception($response['response'], 500);
+                        if (!$response->getStatus()) {
+                            throw new Exception($response->getResponseString(), 500);
                         }
                     } catch (Exception $e) {
                         Log::error('Curl error response: ' . $e->getMessage());
@@ -149,7 +149,7 @@ class Client
                     }
                 }
 
-                $log['sent'][$recipient] = $response;
+                $log['sent'][$recipient] = $response->toArray();
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);

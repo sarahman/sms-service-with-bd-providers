@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class Novocom extends BaseProvider
 {
     public function getUsername()
@@ -38,9 +40,6 @@ class Novocom extends BaseProvider
     {
         $parsedResponse = json_decode($response);
 
-        return [
-            'success' => 0 === (int) $parsedResponse->ErrorCode,
-            'response' => $response,
-        ];
+        return new Response(0 === (int) $parsedResponse->ErrorCode, $response);
     }
 }

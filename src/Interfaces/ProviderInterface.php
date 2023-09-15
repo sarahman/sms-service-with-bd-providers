@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Interfaces;
 
+use Sarahman\SmsService\Response;
+
 interface ProviderInterface
 {
     public function __construct(array $config, $url = null);
@@ -48,7 +50,7 @@ interface ProviderInterface
       * Parses the API/Curl response and returns a common format.
       *
       * @param string $response
-      * @return array
+      * @return Response
       */
     public function parseResponse($response);
 }

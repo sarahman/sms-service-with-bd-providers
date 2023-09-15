@@ -4,6 +4,7 @@ namespace Sarahman\SmsService\Providers;
 
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Sarahman\SmsService\Response;
 use SimpleXMLElement;
 
 class Ssl extends BaseProvider
@@ -55,17 +56,11 @@ class Ssl extends BaseProvider
         try {
             $response = new SimpleXMLElement($response);
 
-            return [
-                'success' => 'SUCESSFULL' === strtoupper((string) $response->LOGIN),
-                'response' => $response->asXML(),
-            ];
+            return new Response('SUCESSFULL' === strtoupper((string) $response->LOGIN), $response->asXML());
         } catch (Exception $exception) {
             Log::error($exception);
 
-            return [
-                'success' => false,
-                'response' => 'SSL not responded',
-            ];
+            return new Response(false, 'SSL did not respond!');
         }
     }
 }

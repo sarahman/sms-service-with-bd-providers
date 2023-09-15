@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class Grameenphone extends BaseProvider
 {
     public function getUsername()
@@ -42,9 +44,6 @@ class Grameenphone extends BaseProvider
     {
         $parsedResponse = json_decode($response);
 
-        return [
-            'success' => 200 == $parsedResponse->statusCode,
-            'response' => $response,
-        ];
+        return new Response(200 == $parsedResponse->statusCode, $response);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Exception;
+use Illuminate\Support\Facades\Log;
+use Sarahman\SmsService\Response;
 use SimpleXMLElement;
 
 class Robi extends BaseProvider
@@ -38,11 +41,14 @@ class Robi extends BaseProvider
 
     public function parseResponse($response)
     {
-        $response = new SimpleXMLElement($response);
+        try {
+            $response = new SimpleXMLElement($response);
 
-        return [
-            'success' => 0 == (string) $response->ErrorCode,
-            'response' => $response->asXML(),
-        ];
+            return new Response(0 == (string) $response->ErrorCode, $response->asXML());
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return new Response(false, 'Robi did not respond!');
+        }
     }
 }

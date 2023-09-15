@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class Paystation extends BaseProvider
 {
     public function getUsername()
@@ -39,9 +41,6 @@ class Paystation extends BaseProvider
     {
         $parsedResponse = json_decode($response);
 
-        return [
-            'success' => 'success' === strtolower($parsedResponse->status),
-            'response' => $response,
-        ];
+        return new Response('success' === strtolower($parsedResponse->status), $response);
     }
 }

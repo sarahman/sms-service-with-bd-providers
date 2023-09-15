@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
+use Sarahman\SmsService\Response;
 use Sarahman\SmsService\Traits\Guzzles;
 
 class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
@@ -64,10 +65,9 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
 
     public function parseResponse($response)
     {
-        return [
-            'success' => preg_match('/^Sent\.*/', $response),
-            'response' => $response,
-        ];
+        preg_match('/^Sent\.*/', $response, $matches);
+
+        return new Response(is_array($matches) && array_key_exists(0, $matches), $response);
     }
 
     public function getAccessToken($generate = false)

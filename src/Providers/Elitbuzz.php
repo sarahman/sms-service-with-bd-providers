@@ -2,6 +2,8 @@
 
 namespace Sarahman\SmsService\Providers;
 
+use Sarahman\SmsService\Response;
+
 class Elitbuzz extends BaseProvider
 {
     public function getUsername()
@@ -38,9 +40,6 @@ class Elitbuzz extends BaseProvider
     {
         preg_match('/^SMS SUBMITTED\: ID \- .*$/i', $response, $matches);
 
-        return [
-            'success' => is_array($matches) && array_key_exists(0, $matches),
-            'response' => $response,
-        ];
+        return new Response(is_array($matches) && array_key_exists(0, $matches), $response);
     }
 }
