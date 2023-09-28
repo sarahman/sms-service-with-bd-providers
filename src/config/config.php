@@ -75,4 +75,5 @@ return [
             'coding' => 3, // Unicode allows or not
         ],
     ],
+    'enable_api_call_logging' => false,
 ];

@@ -3,14 +3,19 @@
 namespace Sarahman\SmsService;
 
 use Exception;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Sarahman\HttpRequestApiLog\Traits\WritesHttpLogs;
 use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
 use Sarahman\SmsService\Interfaces\ProviderInterface;
 use Sarahman\SmsService\Providers;
 
 class Client
 {
+    use WritesHttpLogs;
+
     const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
@@ -27,6 +32,7 @@ class Client
     public function __construct(ProviderInterface $provider)
     {
         $this->provider = $provider;
+        $this->enableLogging = Config::get('sms-service-with-bd-providers::config.enable_api_call_logging', false);
     }
 
     /**
@@ -85,6 +91,8 @@ class Client
                 }
 
                 $log['sent'][$recipient] = $response->toArray();
+
+                $this->log('POST', $options['url'], $options, new Response(200, [], $response->getResponseString()));
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
@@ -92,6 +100,8 @@ class Client
                     'success' => false,
                     'response' => $errorMessage,
                 ];
+
+                $this->log('POST', $options['url'], $options, new Response($errorCode, [], $errorMessage));
             }
         }
 
@@ -133,6 +143,8 @@ class Client
                 $response = $this->provider->parseResponse($response);
 
                 if (!$response->getStatus()) {
+                    $this->log('POST', $options['url'], $options, new Response(500, [], $response->getResponseString()));
+
                     //Resend sms
                     Log::info('SMS sending failed response!');
 
@@ -150,6 +162,8 @@ class Client
                 }
 
                 $log['sent'][$recipient] = $response->toArray();
+
+                $this->log('POST', $options['url'], $options, new Response(200, [], $response->getResponseString()));
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
@@ -157,6 +171,8 @@ class Client
                     'success' => false,
                     'response' => $errorMessage,
                 ];
+
+                $this->log('POST', $options['url'], $options, new Response($errorCode, [], $errorMessage));
             }
         }
 
