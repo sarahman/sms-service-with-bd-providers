@@ -17,9 +17,7 @@
         "php": ">=5.5.34",
         "ext-curl": "*",
         "guzzlehttp/guzzle": "^6.5",
-        "illuminate/config": "^4.0",
         "illuminate/support": "^4.0",
-        "illuminate/validation": "^4.0",
         "psr/http-message-implementation": "*",
         "sarahman/laravel-http-request-api-log": "^1.0"
     },

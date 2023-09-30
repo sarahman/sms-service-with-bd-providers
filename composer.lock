@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc677cfce34378e682d06a15afc23a8f",
+    "content-hash": "f8dd17e807a2fc68e8482e7a13d33ddb",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -306,53 +306,6 @@
             "time": "2023-04-17T16:00:37+00:00"
         },
         {
-            "name": "illuminate/config",
-            "version": "v4.2.17",
-            "target-dir": "Illuminate/Config",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/config.git",
-                "reference": "24b9e07a7c0245eb25574688bef49f873b904385"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/config/zipball/24b9e07a7c0245eb25574688bef49f873b904385",
-                "reference": "24b9e07a7c0245eb25574688bef49f873b904385",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/filesystem": "4.2.*",
-                "illuminate/support": "4.2.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Config": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/illuminate/config/issues",
-                "source": "https://github.com/illuminate/config/tree/4.2"
-            },
-            "time": "2014-11-15T19:22:33+00:00"
-        },
-        {
             "name": "illuminate/container",
             "version": "v4.2.17",
             "target-dir": "Illuminate/Container",
@@ -504,52 +457,6 @@
             "time": "2014-10-02T19:49:50+00:00"
         },
         {
-            "name": "illuminate/filesystem",
-            "version": "v4.2.17",
-            "target-dir": "Illuminate/Filesystem",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "9127fb58eb6b721d98d2f7077df6cb8004da24c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/9127fb58eb6b721d98d2f7077df6cb8004da24c0",
-                "reference": "9127fb58eb6b721d98d2f7077df6cb8004da24c0",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.2.*",
-                "php": ">=5.4.0",
-                "symfony/finder": "2.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Filesystem": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "support": {
-                "source": "https://github.com/illuminate/filesystem/tree/4.2"
-            },
-            "time": "2014-12-29T18:11:33+00:00"
-        },
-        {
             "name": "illuminate/support",
             "version": "v4.2.17",
             "target-dir": "Illuminate/Support",
@@ -597,57 +504,6 @@
             ],
             "support": {
                 "source": "https://github.com/illuminate/support/tree/4.2"
-            },
-            "time": "2015-01-27T20:51:43+00:00"
-        },
-        {
-            "name": "illuminate/validation",
-            "version": "v4.2.17",
-            "target-dir": "Illuminate/Validation",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/validation.git",
-                "reference": "9c6c81df6125b9e63de08f066f7a430a95e8bc8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/validation/zipball/9c6c81df6125b9e63de08f066f7a430a95e8bc8f",
-                "reference": "9c6c81df6125b9e63de08f066f7a430a95e8bc8f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "4.2.*",
-                "illuminate/support": "4.2.*",
-                "php": ">=5.4.0",
-                "symfony/http-foundation": "2.5.*",
-                "symfony/translation": "2.5.*"
-            },
-            "require-dev": {
-                "illuminate/database": "4.2.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Validation": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "support": {
-                "source": "https://github.com/illuminate/validation/tree/4.2"
             },
             "time": "2015-01-27T20:51:43+00:00"
         },
@@ -854,20 +710,19 @@
         },
         {
             "name": "sarahman/laravel-http-request-api-log",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sarahman/laravel-http-request-api-log.git",
-                "reference": "8e14a903d882139e1026d7f5303224383548b03e"
+                "reference": "4da56d51ca5e3770da255c8ac5a75d7cd7dd5545"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sarahman/laravel-http-request-api-log/zipball/8e14a903d882139e1026d7f5303224383548b03e",
-                "reference": "8e14a903d882139e1026d7f5303224383548b03e",
+                "url": "https://api.github.com/repos/sarahman/laravel-http-request-api-log/zipball/4da56d51ca5e3770da255c8ac5a75d7cd7dd5545",
+                "reference": "4da56d51ca5e3770da255c8ac5a75d7cd7dd5545",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "^4.0",
                 "illuminate/database": "^4.0",
                 "illuminate/support": "^4.0",
                 "php": ">=5.5",
@@ -912,115 +767,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sarahman/laravel-http-request-api-log/issues",
-                "source": "https://github.com/sarahman/laravel-http-request-api-log/tree/v1.0.0"
+                "source": "https://github.com/sarahman/laravel-http-request-api-log/tree/v1.0.1"
             },
-            "time": "2023-09-03T06:45:59+00:00"
-        },
-        {
-            "name": "symfony/finder",
-            "version": "v2.5.12",
-            "target-dir": "Symfony/Component/Finder",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Finder.git",
-                "reference": "e527ebf47ff912a45e148b7d0b107b80ec0b3cc2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/e527ebf47ff912a45e148b7d0b107b80ec0b3cc2",
-                "reference": "e527ebf47ff912a45e148b7d0b107b80ec0b3cc2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Finder\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony Finder Component",
-            "homepage": "http://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/Finder/tree/v2.5.11"
-            },
-            "time": "2015-01-03T08:01:13+00:00"
-        },
-        {
-            "name": "symfony/http-foundation",
-            "version": "v2.5.12",
-            "target-dir": "Symfony/Component/HttpFoundation",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "08e783861dd9579bac4092814bbfb0cae6666b65"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/08e783861dd9579bac4092814bbfb0cae6666b65",
-                "reference": "08e783861dd9579bac4092814bbfb0cae6666b65",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/expression-language": "~2.4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\HttpFoundation\\": ""
-                },
-                "classmap": [
-                    "Symfony/Component/HttpFoundation/Resources/stubs"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony HttpFoundation Component",
-            "homepage": "http://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v2.5.12"
-            },
-            "time": "2015-04-01T15:49:36+00:00"
+            "time": "2023-09-30T19:38:09+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -1349,65 +1098,6 @@
                 }
             ],
             "time": "2020-10-23T09:01:57+00:00"
-        },
-        {
-            "name": "symfony/translation",
-            "version": "v2.5.12",
-            "target-dir": "Symfony/Component/Translation",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Translation.git",
-                "reference": "165b5348cd20f8c4b2fcf1097c9c8300d1093b90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Translation/zipball/165b5348cd20f8c4b2fcf1097c9c8300d1093b90",
-                "reference": "165b5348cd20f8c4b2fcf1097c9c8300d1093b90",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/config": "~2.3,>=2.3.12",
-                "symfony/intl": "~2.3",
-                "symfony/yaml": "~2.2"
-            },
-            "suggest": {
-                "symfony/config": "",
-                "symfony/yaml": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Translation\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony Translation Component",
-            "homepage": "http://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/Translation/tree/v2.5.11"
-            },
-            "time": "2015-01-03T15:23:51+00:00"
         }
     ],
     "packages-dev": [
