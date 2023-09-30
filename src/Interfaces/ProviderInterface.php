@@ -30,27 +30,29 @@ interface ProviderInterface
     public function getUsername();
 
     /**
-      * Returns the mapped data of the given data.
-      *
-      * @param array|string $recipient
-      * @param string $message
-      * @param array $params
-      * @return array
-      */
+     * Returns the mapped data of the given data.
+     *
+     * @param array|string $recipient
+     * @param string       $message
+     * @param array        $params
+     *
+     * @return array
+     */
     public function mapParams($recipient, $message, array $params);
 
     /**
-      * Returns the validation rules for the sms data.
-      *
-      * @return array
-      */
+     * Returns the validation rules for the sms data.
+     *
+     * @return array
+     */
     public function getValidationRules();
 
     /**
-      * Parses the API/Curl response and returns a common format.
-      *
-      * @param string $response
-      * @return Response
-      */
+     * Parses the API/Curl response and returns a common format.
+     *
+     * @param string $response
+     *
+     * @return Response
+     */
     public function parseResponse($response);
 }

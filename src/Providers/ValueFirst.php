@@ -25,7 +25,7 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
 
     public function getUrl()
     {
-        return parent::getUrl() . '/sendsms';
+        return parent::getUrl().'/sendsms';
     }
 
     public function getUsername()
@@ -39,14 +39,14 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         if (!array_key_exists('coding', $this->config) || $this->config['coding'] != 3) {
             $message = preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message);
         }
 
         return [
-            'to' => $recipient,
+            'to'   => $recipient,
             'from' => $this->config['from'],
             'text' => $message,
         ];
@@ -57,9 +57,9 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
         return [
             'username' => 'required',
             'password' => 'required',
-            'to' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'text' => 'required',
-            'coding' => 'integer',
+            'to'       => 'required|regex:/^8801[3456789]\d{8}$/',
+            'text'     => 'required',
+            'coding'   => 'integer',
         ];
     }
 
@@ -73,12 +73,15 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
     public function getAccessToken($generate = false)
     {
         $cacheKey = sprintf("%s_AccessToken:%s", __CLASS__, $this->getUsername());
-        if (!$generate && Cache::has($cacheKey)) return Cache::get($cacheKey);
 
-        $api = $this->url . '/api/sendsms/token?action=generate';
+        if (!$generate && Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+
+        $api = $this->url.'/api/sendsms/token?action=generate';
         $request = [
             'headers' => [
-                'Authorization' => ['Basic ' . base64_encode($this->config['username'] . ':' . $this->config['password'])],
+                'Authorization' => ['Basic '.base64_encode($this->config['username'].':'.$this->config['password'])],
             ],
         ];
 
@@ -88,12 +91,13 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
 
             if (200 === $response->getStatusCode()) {
                 $responseData = $this->parseJson($response);
-                $api = $this->url . '/api/sendsms/token?action=enable&token=all';
+                $api = $this->url.'/api/sendsms/token?action=enable&token=all';
                 $request['form_params'] = ['token' => $responseData['token']];
                 $response = $this->makeRequestWithHandlingException($client, $method = 'post', $api, $request);
 
                 if (200 === $response->getStatusCode()) {
                     Cache::put($cacheKey, $responseData['token'], $responseData['expiryDate']);
+
                     return $responseData['token'];
                 }
             }

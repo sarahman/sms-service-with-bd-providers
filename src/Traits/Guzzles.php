@@ -12,17 +12,17 @@ use Psr\Http\Message\ResponseInterface;
 trait Guzzles
 {
     /**
-     * Instantiates and returns the Guzzle client
+     * Instantiates and returns the Guzzle client.
      *
      * @return Client
      */
     private function buildClient()
     {
         return new Client([
-            'base_uri' => $this->baseUri,
-            'timeout' => isset($this->timeout) ? $this->timeout : 0,
+            'base_uri'    => $this->baseUri,
+            'timeout'     => isset($this->timeout) ? $this->timeout : 0,
             'http_errors' => false,
-            'headers' => [
+            'headers'     => [
                 'Content-Type' => 'application/json',
             ],
         ]);
@@ -34,7 +34,7 @@ trait Guzzles
      * @param Client $client
      * @param string $method
      * @param string $url
-     * @param array $params
+     * @param array  $params
      *
      * @return ResponseInterface $response
      */
@@ -54,7 +54,7 @@ trait Guzzles
     }
 
     /**
-     * Parses the JSON response to an array
+     * Parses the JSON response to an array.
      *
      * @param ResponseInterface $response
      *

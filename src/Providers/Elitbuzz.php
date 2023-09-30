@@ -17,22 +17,22 @@ class Elitbuzz extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
             'contacts' => $recipient,
-            'msg' => $message,
+            'msg'      => $message,
         ];
     }
 
     public function getValidationRules()
     {
         return [
-            'api_key' => 'required',
-            'type' => 'required',
+            'api_key'  => 'required',
+            'type'     => 'required',
             'senderid' => 'required',
             'contacts' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'msg' => 'required',
+            'msg'      => 'required',
         ];
     }
 

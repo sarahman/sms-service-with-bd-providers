@@ -20,10 +20,10 @@ class Robi extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
-            'To' => $recipient,
+            'To'      => $recipient,
             'Message' => $message,
         ];
     }
@@ -33,9 +33,9 @@ class Robi extends BaseProvider
         return [
             'Username' => 'required',
             'Password' => 'required',
-            'From' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'To' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'Message' => 'required',
+            'From'     => 'required|regex:/^8801[3456789]\d{8}$/',
+            'To'       => 'required|regex:/^8801[3456789]\d{8}$/',
+            'Message'  => 'required',
         ];
     }
 

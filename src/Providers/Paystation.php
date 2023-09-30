@@ -17,11 +17,11 @@ class Paystation extends BaseProvider
             return [];
         }
 
-        $recipient = '0' . $matches[3];
+        $recipient = '0'.$matches[3];
 
         return [
-            'type' => $this->config['type'],
-            'number' => $recipient,
+            'type'    => $this->config['type'],
+            'number'  => $recipient,
             'message' => $message,
         ];
     }
@@ -29,11 +29,11 @@ class Paystation extends BaseProvider
     public function getValidationRules()
     {
         return [
-            'user_id' => 'required',
+            'user_id'  => 'required',
             'password' => 'required',
-            'type' => 'required',
-            'number' => 'required|regex:/^01[3456789]\d{8}$/',
-            'message' => 'required',
+            'type'     => 'required',
+            'number'   => 'required|regex:/^01[3456789]\d{8}$/',
+            'message'  => 'required',
         ];
     }
 

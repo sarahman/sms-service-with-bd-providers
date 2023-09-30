@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use Sarahman\HttpRequestApiLog\Traits\WritesHttpLogs;
 use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
 use Sarahman\SmsService\Interfaces\ProviderInterface;
-use Sarahman\SmsService\Providers;
 
 class Client
 {
@@ -39,8 +38,9 @@ class Client
      * Return a SMS provider according to the given provider name.
      *
      * @param string $providerName
-     * @param array $config
+     * @param array  $config
      * @param string $url
+     *
      * @return ProviderInterface
      */
     public static function getProvider($providerName = self::PROVIDER_SSL, array $config = [], $url = null)
@@ -97,7 +97,7 @@ class Client
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
                 $log['failed'][$recipient] = [
-                    'success' => false,
+                    'success'  => false,
                     'response' => $errorMessage,
                 ];
 
@@ -134,7 +134,7 @@ class Client
                     $response = $this->executeWithCurl($options);
                 } catch (Exception $e) {
                     $log['failed'][$recipient] = [
-                        'success' => false,
+                        'success'  => false,
                         'response' => $e->getMessage(),
                     ];
                     $response = '';
@@ -156,7 +156,8 @@ class Client
                             throw new Exception($response->getResponseString(), 500);
                         }
                     } catch (Exception $e) {
-                        Log::error('Curl error response: ' . $e->getMessage());
+                        Log::error('Curl error response: '.$e->getMessage());
+
                         throw $e;
                     }
                 }
@@ -168,7 +169,7 @@ class Client
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
                 $log['failed'][$recipient] = [
-                    'success' => false,
+                    'success'  => false,
                     'response' => $errorMessage,
                 ];
 
@@ -182,7 +183,7 @@ class Client
     private function prepareCurlOptions(array $data)
     {
         $options = [
-            'url' => $this->provider->getUrl(),
+            'url'     => $this->provider->getUrl(),
             'timeout' => 30,
         ];
 
@@ -191,7 +192,7 @@ class Client
             case self::PROVIDER_NOVOCOM:
                 $options += [
                     'httpheader' => ['Content-Type: application/json'],
-                    'post' => 1,
+                    'post'       => 1,
                     'postfields' => json_encode($data),
                 ];
                 break;
@@ -201,23 +202,23 @@ class Client
                     'httpheader' => [
                         'Content-Type: application/json',
                         'Accept: application/json',
-                        'user_id:' . $data['user_id'],
-                        'password:' . $data['password'],
+                        'user_id:'.$data['user_id'],
+                        'password:'.$data['password'],
                     ],
-                    'post' => 1,
+                    'post'       => 1,
                     'postfields' => json_encode($data),
                 ];
                 break;
 
             default:
                 $options += [
-                    'post' => count($data),
+                    'post'       => count($data),
                     'postfields' => http_build_query($data),
                 ];
         }
 
         if ($this->provider instanceof NeedsAuthenticationInterface) {
-            $options['httpheader'][] = 'Authorization: Bearer ' . $this->provider->getAccessToken();
+            $options['httpheader'][] = 'Authorization: Bearer '.$this->provider->getAccessToken();
         }
 
         return $options;
@@ -229,7 +230,7 @@ class Client
         isset($options['returntransfer']) || $options['returntransfer'] = true;
 
         foreach ($options as $key => $value) {
-            $option = 'CURLOPT_' . strtoupper($key);
+            $option = 'CURLOPT_'.strtoupper($key);
             $curlOptions[constant($option)] = $value;
         }
 
@@ -240,7 +241,7 @@ class Client
         $response = curl_exec($ch);
 
         if ($response != true) {
-            $eMsg = 'cURL Error # ' . curl_errno($ch) . ' | cURL Error Message: ' . curl_error($ch);
+            $eMsg = 'cURL Error # '.curl_errno($ch).' | cURL Error Message: '.curl_error($ch);
 
             curl_close($ch);
 
@@ -259,7 +260,7 @@ class Client
 
         return [
             'httpStatusCode' => $httpStatusCode,
-            'body' => $response,
+            'body'           => $response,
         ];
     }
 
@@ -270,11 +271,11 @@ class Client
 
         return [
             'summary' => [
-                'sent' => $sent,
+                'sent'   => $sent,
                 'failed' => $failed,
-                'total' => $sent + $failed,
+                'total'  => $sent + $failed,
             ],
-            'log' => $log,
+            'log'     => $log,
         ];
     }
 }

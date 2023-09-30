@@ -17,22 +17,22 @@ class Novocom extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
             'MobileNumbers' => $recipient,
-            'Message' => $message,
+            'Message'       => $message,
         ];
     }
 
     public function getValidationRules()
     {
         return [
-            'ClientId' => 'required',
-            'ApiKey' => 'required',
-            'SenderId' => 'required',
+            'ClientId'      => 'required',
+            'ApiKey'        => 'required',
+            'SenderId'      => 'required',
             'MobileNumbers' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'Message' => 'required',
+            'Message'       => 'required',
         ];
     }
 

@@ -7,7 +7,8 @@ interface NeedsAuthenticationInterface
     /**
      * Return the access token with managing it.
      *
-     * @param boolean $generate
+     * @param bool $generate
+     *
      * @return string
      */
     public function getAccessToken($generate = false);

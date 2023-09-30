@@ -59,7 +59,7 @@ abstract class BaseProvider implements ProviderInterface
     private function loadConfigFromFile()
     {
         $this->configName = !is_null($this->configName) ? $this->configName : get_class($this);
-        $this->config = Config::get('sms-service-with-bd-providers::config.providers.' . $this->configName);
+        $this->config = Config::get('sms-service-with-bd-providers::config.providers.'.$this->configName);
 
         $this->extractUrlFromConfigAndSet();
 

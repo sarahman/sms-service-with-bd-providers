@@ -17,11 +17,11 @@ class BoomCast extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
             'receiver' => $recipient,
-            'message' => preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message),
+            'message'  => preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message),
         ];
     }
 
@@ -30,10 +30,10 @@ class BoomCast extends BaseProvider
         return [
             'userName' => 'required',
             'password' => 'required',
-            'MsgType' => 'required',
-            'masking' => 'required',
+            'MsgType'  => 'required',
+            'masking'  => 'required',
             'receiver' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'message' => 'required',
+            'message'  => 'required',
         ];
     }
 

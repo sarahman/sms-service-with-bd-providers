@@ -25,7 +25,7 @@ class Ssl extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
         $clientRefId = !array_key_exists('id', $params) ? uniqid() : $params['id'];
 
         return [
@@ -42,9 +42,9 @@ class Ssl extends BaseProvider
     public function getValidationRules()
     {
         return [
-            'user' => 'required',
-            'pass' => 'required',
-            'sid' => 'required',
+            'user'    => 'required',
+            'pass'    => 'required',
+            'sid'     => 'required',
             'sms.0.0' => 'required|regex:/^8801[3456789]\d{8}$/',
             'sms.0.1' => 'required',
             'sms.0.2' => 'required',

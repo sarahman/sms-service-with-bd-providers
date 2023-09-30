@@ -17,10 +17,10 @@ class Banglalink extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
-            'msisdn' => $recipient,
+            'msisdn'  => $recipient,
             'message' => preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message),
         ];
     }
@@ -28,9 +28,9 @@ class Banglalink extends BaseProvider
     public function getValidationRules()
     {
         return [
-            'userID' => 'required',
-            'passwd' => 'required',
-            'msisdn' => 'required|regex:/^8801[3456789]\d{8}$/',
+            'userID'  => 'required',
+            'passwd'  => 'required',
+            'msisdn'  => 'required|regex:/^8801[3456789]\d{8}$/',
             'message' => 'required',
         ];
     }

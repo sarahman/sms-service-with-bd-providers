@@ -17,10 +17,10 @@ class Grameenphone extends BaseProvider
             return [];
         }
 
-        $recipient = '0' . $matches[3];
+        $recipient = '0'.$matches[3];
 
         return [
-            'msisdn' => $recipient,
+            'msisdn'  => $recipient,
             'message' => $message,
         ];
     }
@@ -28,15 +28,15 @@ class Grameenphone extends BaseProvider
     public function getValidationRules()
     {
         return [
-            'username' => 'required',
-            'password' => 'required',
-            'apicode' => 'required',
-            'msisdn' => 'required|regex:/^01[3456789]\d{8}$/',
+            'username'    => 'required',
+            'password'    => 'required',
+            'apicode'     => 'required',
+            'msisdn'      => 'required|regex:/^01[3456789]\d{8}$/',
             'countrycode' => 'required',
-            'cli' => 'required',
+            'cli'         => 'required',
             'messagetype' => 'required|integer',
-            'message' => 'required',
-            'messageid' => 'required|integer',
+            'message'     => 'required',
+            'messageid'   => 'required|integer',
         ];
     }
 

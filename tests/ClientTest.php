@@ -19,12 +19,13 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->config = require __DIR__ . '/../src/config/config.php';
-        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.' . Ssl::class)->andReturn(array_get($this->config, 'providers.' . Ssl::class));
+        $this->config = require __DIR__.'/../src/config/config.php';
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Ssl::class)->andReturn(array_get($this->config, 'providers.'.Ssl::class));
     }
 
     /**
      * @test
+     *
      * @throws Exception
      */
     public function it_checks_default_sms_provider()
@@ -36,6 +37,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @throws Exception
      */
     public function it_checks_the_provided_sms_provider_to_be_valid()
@@ -47,16 +49,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @throws Exception
      */
     public function it_checks_the_provided_sms_provider_to_be_invalid()
     {
         $this->setExpectedException(Exception::class, 'Invalid SMS provider name is given.');
-        Client::getProvider(Client::PROVIDER_SSL . '2');
+        Client::getProvider(Client::PROVIDER_SSL.'2');
     }
 
     /**
      * @test
+     *
      * @throws Exception
      */
     public function it_checks_sending_sms_through_ssl()

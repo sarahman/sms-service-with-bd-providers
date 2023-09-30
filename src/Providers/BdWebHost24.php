@@ -17,11 +17,11 @@ class BdWebHost24 extends BaseProvider
             return [];
         }
 
-        $recipient = '880' . $matches[3];
+        $recipient = '880'.$matches[3];
 
         return [
             'contacts' => $recipient,
-            'msg' => urlencode(preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message)),
+            'msg'      => urlencode(preg_replace('/[^a-zA-Z0-9\.@!?&\-,%\(\):\"]/', ' ', $message)),
         ];
     }
 
@@ -29,10 +29,10 @@ class BdWebHost24 extends BaseProvider
     {
         return [
             'senderid' => 'required',
-            'api_key' => 'required',
-            'type' => 'required',
+            'api_key'  => 'required',
+            'type'     => 'required',
             'contacts' => 'required|regex:/^8801[3456789]\d{8}$/',
-            'msg' => 'required',
+            'msg'      => 'required',
         ];
     }
 
