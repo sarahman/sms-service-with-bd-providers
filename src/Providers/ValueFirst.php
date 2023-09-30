@@ -16,8 +16,6 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
     use Guzzles;
     use WritesHttpLogs;
 
-    private $baseUri = '';
-
     public function __construct(array $config = [], $url = null)
     {
         parent::__construct($config, $url);

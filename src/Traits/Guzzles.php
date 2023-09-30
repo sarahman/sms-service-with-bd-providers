@@ -11,6 +11,9 @@ use Psr\Http\Message\ResponseInterface;
 
 trait Guzzles
 {
+    private $baseUri = '';
+    private $timeout = 0;
+
     /**
      * Instantiates and returns the Guzzle client.
      *

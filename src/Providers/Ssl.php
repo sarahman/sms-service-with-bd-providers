@@ -54,9 +54,9 @@ class Ssl extends BaseProvider
     public function parseResponse($response)
     {
         try {
-            $response = new SimpleXMLElement($response);
+            $xmlElement = new SimpleXMLElement($response);
 
-            return new Response('SUCESSFULL' === strtoupper((string) $response->LOGIN), $response->asXML());
+            return new Response('SUCESSFULL' === strtoupper((string) $xmlElement->LOGIN), $response);
         } catch (Exception $exception) {
             Log::error($exception);
 

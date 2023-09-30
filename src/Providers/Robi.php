@@ -42,9 +42,9 @@ class Robi extends BaseProvider
     public function parseResponse($response)
     {
         try {
-            $response = new SimpleXMLElement($response);
+            $xmlElement = new SimpleXMLElement($response);
 
-            return new Response(0 == (string) $response->ErrorCode, $response->asXML());
+            return new Response(0 == (string) $xmlElement->ErrorCode, $response);
         } catch (Exception $exception) {
             Log::error($exception);
 

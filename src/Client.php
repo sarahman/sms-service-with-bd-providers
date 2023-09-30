@@ -3,7 +3,7 @@
 namespace Sarahman\SmsService;
 
 use Exception;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -83,7 +83,7 @@ class Client
                     throw new Exception(json_encode($validator->messages()->all()), 422);
                 }
 
-                $options = $this->prepareCurlOptions($data);
+                $options += $this->prepareCurlOptions($data);
                 $response = $this->provider->parseResponse($this->executeWithCurl($options));
 
                 if (!$response->getStatus()) {
@@ -92,7 +92,7 @@ class Client
 
                 $log['sent'][$recipient] = $response->toArray();
 
-                $this->log('POST', $options['url'], $options, new Response(200, [], $response->getResponseString()));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse(200, [], $response->getResponseString()));
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
@@ -101,7 +101,7 @@ class Client
                     'response' => $errorMessage,
                 ];
 
-                $this->log('POST', $options['url'], $options, new Response($errorCode, [], $errorMessage));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
             }
         }
 
@@ -128,7 +128,7 @@ class Client
                     throw new Exception(json_encode($validator->messages()->all()), 422);
                 }
 
-                $options = $this->prepareCurlOptions($data);
+                $options += $this->prepareCurlOptions($data);
 
                 try {
                     $response = $this->executeWithCurl($options);
@@ -143,7 +143,7 @@ class Client
                 $response = $this->provider->parseResponse($response);
 
                 if (!$response->getStatus()) {
-                    $this->log('POST', $options['url'], $options, new Response(500, [], $response->getResponseString()));
+                    $this->log('POST', $options['url'], $options, new GuzzleResponse(500, [], $response->getResponseString()));
 
                     //Resend sms
                     Log::info('SMS sending failed response!');
@@ -164,7 +164,7 @@ class Client
 
                 $log['sent'][$recipient] = $response->toArray();
 
-                $this->log('POST', $options['url'], $options, new Response(200, [], $response->getResponseString()));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse(200, [], $response->getResponseString()));
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
@@ -173,17 +173,23 @@ class Client
                     'response' => $errorMessage,
                 ];
 
-                $this->log('POST', $options['url'], $options, new Response($errorCode, [], $errorMessage));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
             }
         }
 
         return $this->getSummaryWithLogs($log);
     }
 
+    /**
+     * Prepare the curl options array according to the given data.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
     private function prepareCurlOptions(array $data)
     {
         $options = [
-            'url'     => $this->provider->getUrl(),
             'timeout' => 30,
         ];
 
@@ -224,7 +230,14 @@ class Client
         return $options;
     }
 
-    private function executeWithCurl(array $options, $withHttpStatus = false)
+    /**
+     * Execute the Curl request according to the given curl options.
+     *
+     * @param array $options
+     *
+     * @return string
+     */
+    private function executeWithCurl(array $options)
     {
         $curlOptions = [];
         isset($options['returntransfer']) || $options['returntransfer'] = true;
@@ -248,20 +261,9 @@ class Client
             throw new Exception($eMsg);
         }
 
-        if ($withHttpStatus) {
-            $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        }
-
         curl_close($ch);
 
-        if (!$withHttpStatus) {
-            return $response;
-        }
-
-        return [
-            'httpStatusCode' => $httpStatusCode,
-            'body'           => $response,
-        ];
+        return (string) $response;
     }
 
     private function getSummaryWithLogs(array $log)
