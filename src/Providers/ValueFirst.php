@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
+use Sarahman\HttpRequestApiLog\Traits\WritesHttpLogs;
 use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
 use Sarahman\SmsService\Response;
 use Sarahman\SmsService\Traits\Guzzles;
@@ -13,14 +14,14 @@ use Sarahman\SmsService\Traits\Guzzles;
 class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
 {
     use Guzzles;
+    use WritesHttpLogs;
 
     private $baseUri = '';
-    private $enableLogging = false;
 
     public function __construct(array $config = [], $url = null)
     {
         parent::__construct($config, $url);
-        $this->enableLogging = Config::get('text-message.enable_api_call_logging', false);
+        $this->enableLogging = Config::get('sms-service-with-bd-providers::config.enable_api_call_logging', false);
     }
 
     public function getUrl()
@@ -72,7 +73,7 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
 
     public function getAccessToken($generate = false)
     {
-        $cacheKey = sprintf("%s_AccessToken:%s", __CLASS__, $this->getUsername());
+        $cacheKey = sprintf('%s_AccessToken:%s', __CLASS__, $this->getUsername());
 
         if (!$generate && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
@@ -89,11 +90,15 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
             $client = $this->buildClient();
             $response = $this->makeRequestWithHandlingException($client, $method = 'post', $api, $request);
 
+            $this->log($method, $api, $request, $response);
+
             if (200 === $response->getStatusCode()) {
                 $responseData = $this->parseJson($response);
                 $api = $this->url.'/api/sendsms/token?action=enable&token=all';
                 $request['form_params'] = ['token' => $responseData['token']];
                 $response = $this->makeRequestWithHandlingException($client, $method = 'post', $api, $request);
+
+                $this->log($method, $api, $request, $response);
 
                 if (200 === $response->getStatusCode()) {
                     Cache::put($cacheKey, $responseData['token'], $responseData['expiryDate']);

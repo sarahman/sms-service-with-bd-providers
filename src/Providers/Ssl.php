@@ -11,7 +11,7 @@ class Ssl extends BaseProvider
 {
     public function getUrl()
     {
-        return sprintf("%s/%s/server.php", parent::getUrl(), $this->config['sid']);
+        return sprintf('%s/%s/server.php', parent::getUrl(), $this->config['sid']);
     }
 
     public function getUsername()
