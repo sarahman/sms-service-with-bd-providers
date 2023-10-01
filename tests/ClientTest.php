@@ -9,7 +9,6 @@ use Illuminate\Support\MessageBag;
 use Mockery;
 use PHPUnit_Framework_TestCase;
 use Sarahman\SmsService\Client;
-use Sarahman\SmsService\Providers\Ssl;
 
 class ClientTest extends PHPUnit_Framework_TestCase
 {
@@ -19,8 +18,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->config = require __DIR__.'/../src/config/config.php';
-        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Ssl::class)->andReturn(array_get($this->config, 'providers.'.Ssl::class));
+        $this->config = require_once __DIR__.'/../src/config/config.php';
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Client::PROVIDER_SSL)->andReturn(array_get($this->config, 'providers.'.Client::PROVIDER_SSL));
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.enable_api_call_logging', false)->andReturn(array_get($this->config, 'enable_api_call_logging'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $provider = Client::getProvider();
 
-        $this->assertInstanceOf(Ssl::class, $provider);
+        $this->assertInstanceOf(Client::PROVIDER_SSL, $provider);
     }
 
     /**
@@ -44,7 +44,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $provider = Client::getProvider(Client::PROVIDER_SSL);
 
-        $this->assertInstanceOf(Ssl::class, $provider);
+        $this->assertInstanceOf(Client::PROVIDER_SSL, $provider);
     }
 
     /**
