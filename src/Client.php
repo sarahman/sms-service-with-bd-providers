@@ -96,10 +96,7 @@ class Client
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
-                $log['failed'][$recipient] = [
-                    'success'  => false,
-                    'response' => $errorMessage,
-                ];
+                $log['failed'][$recipient] = (new Response(false, $errorMessage))->toArray();
 
                 $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
             }
@@ -133,10 +130,7 @@ class Client
                 try {
                     $response = $this->executeWithCurl($options);
                 } catch (Exception $e) {
-                    $log['failed'][$recipient] = [
-                        'success'  => false,
-                        'response' => $e->getMessage(),
-                    ];
+                    $log['failed'][$recipient] = (new Response(false, $e->getMessage()))->toArray();
                     $response = '';
                 }
 
@@ -168,10 +162,7 @@ class Client
             } catch (Exception $e) {
                 $errorCode = $e->getCode() >= 100 ? $e->getCode() : 500;
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
-                $log['failed'][$recipient] = [
-                    'success'  => false,
-                    'response' => $errorMessage,
-                ];
+                $log['failed'][$recipient] = (new Response(false, $errorMessage))->toArray();
 
                 $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
             }
