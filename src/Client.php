@@ -24,6 +24,7 @@ class Client
     const PROVIDER_PAYSTATION = Providers\Paystation::class;
     const PROVIDER_ROBI = Providers\Robi::class;
     const PROVIDER_SSL = Providers\Ssl::class;
+    const PROVIDER_SSL_PLUS = Providers\SslPlus::class;
     const PROVIDER_VALUE_FIRST = Providers\ValueFirst::class;
 
     private $provider;
@@ -55,6 +56,7 @@ class Client
             case self::PROVIDER_PAYSTATION:
             case self::PROVIDER_ROBI:
             case self::PROVIDER_SSL:
+            case self::PROVIDER_SSL_PLUS:
             case self::PROVIDER_VALUE_FIRST:
                 return new $providerName($config, $url);
 

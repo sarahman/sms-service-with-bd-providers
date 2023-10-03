@@ -67,6 +67,11 @@ return [
             'pass' => '',
             'sid'  => '',
         ],
+        Client::PROVIDER_SSL_PLUS => [
+            'url'       => 'https://smsplus.sslwireless.com/api/v3/send-sms',
+            'api_token' => '',
+            'sid'       => '',
+        ],
         Client::PROVIDER_VALUE_FIRST => [
             'url'      => 'http://www.myvaluefirst.com/smpp/sendsms',
             'username' => '',
