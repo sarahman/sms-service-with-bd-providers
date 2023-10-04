@@ -74,5 +74,48 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('summary', $result);
         $this->assertArrayHasKey('log', $result);
+        $this->assertEquals($result['summary']['sent'], $result['summary']['total']);
+    }
+
+    /**
+     * @test
+     *
+     * @throws Exception
+     */
+    public function it_checks_sending_sms_through_ssl_plus()
+    {
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Client::PROVIDER_SSL_PLUS)->andReturn(array_get($this->config, 'providers.'.Client::PROVIDER_SSL_PLUS));
+
+        $messageBag = new MessageBag();
+
+        Validator::shouldReceive('make')->once()->andReturn(Mockery::mock(['fails' => false, 'messages' => $messageBag]));
+
+        $provider = new Client(Client::getProvider(Client::PROVIDER_SSL_PLUS));
+        $result = $provider->send('01914886226', 'Alhamdulillah!');
+
+        $this->assertArrayHasKey('summary', $result);
+        $this->assertArrayHasKey('log', $result);
+        $this->assertEquals($result['summary']['sent'], $result['summary']['total']);
+    }
+
+    /**
+     * @test
+     *
+     * @throws Exception
+     */
+    public function it_checks_sending_sms_through_ssl_plus_with_reference()
+    {
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Client::PROVIDER_SSL_PLUS)->andReturn(array_get($this->config, 'providers.'.Client::PROVIDER_SSL_PLUS));
+
+        $messageBag = new MessageBag();
+
+        Validator::shouldReceive('make')->once()->andReturn(Mockery::mock(['fails' => false, 'messages' => $messageBag]));
+
+        $provider = new Client(Client::getProvider(Client::PROVIDER_SSL_PLUS));
+        $result = $provider->send('01914886226', 'Alhamdulillah!', ['csms_id' => 'ref-'.uniqid()]);
+
+        $this->assertArrayHasKey('summary', $result);
+        $this->assertArrayHasKey('log', $result);
+        $this->assertEquals($result['summary']['sent'], $result['summary']['total']);
     }
 }
