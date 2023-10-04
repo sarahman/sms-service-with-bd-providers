@@ -209,6 +209,20 @@ class Client
                 ];
                 break;
 
+            case self::PROVIDER_SSL_PLUS:
+                $encodedData = json_encode($data);
+                $options += [
+                    'httpheader'    => [
+                        'Content-Type: application/json',
+                        'Content-Length: '.strlen($encodedData),
+                        'Accept: application/json',
+                    ],
+                    'customrequest' => 'POST',
+                    'post'          => 1,
+                    'postfields'    => $encodedData,
+                ];
+                break;
+
             default:
                 $options += [
                     'post'       => count($data),
