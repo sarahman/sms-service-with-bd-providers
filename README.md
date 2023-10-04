@@ -166,7 +166,7 @@ try {
 - [NovoCom Limited, Bangladesh](https://www.novocom-bd.com)
 - [PayStation Service Hub Limited, Bangladesh](https://merchant.paystation.com.bd)
 - [Robi Axiata Limited, Bangladesh](https://www.robi.com.bd/en/business/mobile-services/corporate-solutions)
-- [SSL Wireless Limited, Bangladesh](https://www.sslwireless.com)
+- [SSL Wireless Limited (v2 & v3), Bangladesh](https://www.sslwireless.com)
 - [ValueFirst Digital Media Private Limited, Bangladesh](https://www.vfirst.com)
 
 ## For Other Gateway Providers
