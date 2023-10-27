@@ -85,8 +85,8 @@ class Client
                     throw new Exception(json_encode($validator->messages()->all()), 422);
                 }
 
-                $options += $this->prepareCurlOptions($data);
-                $response = $this->provider->parseResponse($this->executeWithCurl($options));
+                $options += $this->prepareOptionsForProvider($data);
+                $response = $this->provider->parseResponse($this->executeWithCurl($this->prepareCurlOptions($options)));
 
                 if (!$response->getStatus()) {
                     throw new Exception($response->getResponseString(), 500);
@@ -127,10 +127,11 @@ class Client
                     throw new Exception(json_encode($validator->messages()->all()), 422);
                 }
 
-                $options += $this->prepareCurlOptions($data);
+                $options += $this->prepareOptionsForProvider($data);
+                $curlOptions = $this->prepareCurlOptions($options);
 
                 try {
-                    $response = $this->executeWithCurl($options);
+                    $response = $this->executeWithCurl($curlOptions);
                 } catch (Exception $e) {
                     $log['failed'][$recipient] = (new Response(false, $e->getMessage()))->toArray();
                     $response = '';
@@ -141,11 +142,11 @@ class Client
                 if (!$response->getStatus()) {
                     $this->log('POST', $options['url'], $options, new GuzzleResponse(500, [], $response->getResponseString()));
 
-                    //Resend sms
+                    // Resend sms
                     Log::info('SMS sending failed response!');
 
                     try {
-                        $response = $this->provider->parseResponse($this->executeWithCurl($options));
+                        $response = $this->provider->parseResponse($this->executeWithCurl($curlOptions));
                         Log::info('Second try of sending SMS', $response);
 
                         if (!$response->getStatus()) {
@@ -174,13 +175,13 @@ class Client
     }
 
     /**
-     * Prepare the curl options array according to the given data.
+     * Prepare the options array according to the given provider data.
      *
      * @param array $data
      *
      * @return array
      */
-    private function prepareCurlOptions(array $data)
+    private function prepareOptionsForProvider(array $data)
     {
         $options = [
             'timeout' => 30,
@@ -238,13 +239,13 @@ class Client
     }
 
     /**
-     * Execute the Curl request according to the given curl options.
+     * Prepare the curl options for the curl request.
      *
      * @param array $options
      *
-     * @return string
+     * @return array
      */
-    private function executeWithCurl(array $options)
+    private function prepareCurlOptions(array $options)
     {
         $curlOptions = [];
         isset($options['returntransfer']) || $options['returntransfer'] = true;
@@ -254,6 +255,18 @@ class Client
             $curlOptions[constant($option)] = $value;
         }
 
+        return $curlOptions;
+    }
+
+    /**
+     * Execute the Curl request according to the given curl options.
+     *
+     * @param array $curlOptions
+     *
+     * @return string
+     */
+    private function executeWithCurl(array $curlOptions)
+    {
         $ch = curl_init();
 
         curl_setopt_array($ch, $curlOptions);
@@ -268,22 +281,11 @@ class Client
 
             if (60 == $errorNumber) {
                 $curlOptions[constant('CURLOPT_SSL_VERIFYPEER')] = false;
-                $ch = curl_init();
 
-                curl_setopt_array($ch, $curlOptions);
-
-                $response = curl_exec($ch);
-
-                if ($response != true) {
-                    $eMsg = 'cURL Error # '.curl_errno($ch).' | cURL Error Message: '.curl_error($ch);
-
-                    curl_close($ch);
-
-                    throw new Exception($eMsg);
-                }
-            } else {
-                throw new Exception($eMsg);
+                return $this->executeWithCurl($curlOptions);
             }
+
+            throw new Exception($eMsg);
         }
 
         curl_close($ch);
