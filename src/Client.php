@@ -261,11 +261,29 @@ class Client
         $response = curl_exec($ch);
 
         if ($response != true) {
-            $eMsg = 'cURL Error # '.curl_errno($ch).' | cURL Error Message: '.curl_error($ch);
+            $errorNumber = curl_errno($ch);
+            $eMsg = 'cURL Error # '.$errorNumber.' | cURL Error Message: '.curl_error($ch);
 
             curl_close($ch);
 
-            throw new Exception($eMsg);
+            if (60 == $errorNumber) {
+                $curlOptions[constant('CURLOPT_SSL_VERIFYPEER')] = false;
+                $ch = curl_init();
+
+                curl_setopt_array($ch, $curlOptions);
+
+                $response = curl_exec($ch);
+
+                if ($response != true) {
+                    $eMsg = 'cURL Error # '.curl_errno($ch).' | cURL Error Message: '.curl_error($ch);
+
+                    curl_close($ch);
+
+                    throw new Exception($eMsg);
+                }
+            } else {
+                throw new Exception($eMsg);
+            }
         }
 
         curl_close($ch);
