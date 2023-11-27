@@ -5,6 +5,8 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/sarahman/sms-service-with-bd-providers.svg?style=flat-square)](https://scrutinizer-ci.com/g/sarahman/sms-service-with-bd-providers)
 [![StyleCI](https://styleci.io/repos/686400823/shield)](https://styleci.io/repos/686400823)
 [![Total Downloads](https://img.shields.io/packagist/dt/sarahman/sms-service-with-bd-providers.svg?style=flat-square)](https://packagist.org/packages/sarahman/sms-service-with-bd-providers)
+[![License](http://poser.pugx.org/sarahman/sms-service-with-bd-providers/license)](https://packagist.org/packages/sarahman/sms-service-with-bd-providers)
+[![PHP Version Require](http://poser.pugx.org/sarahman/sms-service-with-bd-providers/require/php)](https://packagist.org/packages/sarahman/sms-service-with-bd-providers)
 
 Simple php library to interact with various SMS gateways to send SMS to the Bangladeshi mobile users with storing SMS request logs.
 
