@@ -2,7 +2,7 @@
 
 namespace Sarahman\SmsService\Providers;
 
-use Sarahman\SmsService\helpers;
+use Sarahman\SmsService\Helpers;
 use Sarahman\SmsService\Interfaces\ProviderInterface;
 
 abstract class BaseProvider implements ProviderInterface

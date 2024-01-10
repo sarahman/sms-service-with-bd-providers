@@ -1,8 +1,9 @@
 <?php
 
 namespace Sarahman\SmsService;
-use Illuminate\Support\Facades\Config;
+
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Config;
 
 class Helpers
 {
