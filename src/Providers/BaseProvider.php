@@ -2,7 +2,7 @@
 
 namespace Sarahman\SmsService\Providers;
 
-use Illuminate\Support\Facades\Config;
+use Sarahman\SmsService\helpers;
 use Sarahman\SmsService\Interfaces\ProviderInterface;
 
 abstract class BaseProvider implements ProviderInterface
@@ -59,7 +59,8 @@ abstract class BaseProvider implements ProviderInterface
     private function loadConfigFromFile()
     {
         $this->configName = !is_null($this->configName) ? $this->configName : get_class($this);
-        $this->config = Config::get('sms-service-with-bd-providers::config.providers.'.$this->configName);
+
+        $this->config = Helpers::getSMSConfig($this->configName);
 
         $this->extractUrlFromConfigAndSet();
 

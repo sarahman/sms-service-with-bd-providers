@@ -3,17 +3,38 @@
 namespace Sarahman\SmsService;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Application;
 
 class SmsGatewayServiceProvider extends ServiceProvider
 {
+    protected $provider;
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
+
+        $this->provider = $this->getProvider();
+    }
+
     public function boot()
     {
-        $this->package('sarahman/sms-service-with-bd-providers', null, __DIR__);
-        $this->package('sarahman/laravel-http-request-api-log', null, __DIR__.'/../../laravel-http-request-api-log/src');
+        if (method_exists($this->provider, 'boot')) {
+            return $this->provider->boot();
+        }
     }
 
     public function register()
     {
         // We have nothing to register here
+    }
+
+    private function getProvider()
+    {
+        if (version_compare(Application::VERSION, '5.0', '<')) {
+            $provider = '\Sarahman\SmsService\ServiceProviderForLaravel4';
+        } else {
+            $provider = '\Sarahman\SmsService\ServiceProviderForLaravelRecent';
+        }
+        return new $provider($this->app);
     }
 }

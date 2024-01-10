@@ -226,7 +226,7 @@ class Client
 
             default:
                 $options += [
-                    'post'       => count($data),
+                    'post'       => 1,
                     'postfields' => http_build_query($data),
                 ];
         }
