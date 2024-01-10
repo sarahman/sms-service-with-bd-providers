@@ -2,9 +2,9 @@
 
 namespace Sarahman\SmsService;
 
-use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Contracts\Support\Arrayable;
 
-class Response implements ArrayableInterface
+class Response implements Arrayable
 {
     /**
      * Returns the status of the response as boolean.
