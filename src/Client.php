@@ -224,9 +224,16 @@ class Client
                 ];
                 break;
 
-            default:
+            case self::PROVIDER_ELITBUZZ:
                 $options += [
                     'post'       => 1,
+                    'postfields' => http_build_query($data),
+                ];
+                break;
+
+            default:
+                $options += [
+                    'post'       => count($data),
                     'postfields' => http_build_query($data),
                 ];
         }
