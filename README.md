@@ -33,9 +33,14 @@ Next, you need to install the service provider:
 ```
 
 You can publish the config file with:
-
+### For Laravel version 4.*
 ```bash
 php artisan config:publish sarahman/sms-service-with-bd-providers
+```
+
+### For Laravel version greater than 4
+```bash
+php artisan vendor:publish --provider="Sarahman\SmsService\ServiceProviderForLaravelRecent"
 ```
 
 This is the contents of the published config file:
