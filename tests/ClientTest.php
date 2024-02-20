@@ -139,4 +139,25 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('log', $result);
         $this->assertEquals($result['summary']['sent'], $result['summary']['total']);
     }
+
+    /**
+     * @test
+     *
+     * @throws Exception
+     */
+    public function it_checks_sending_sms_through_bulksmsbd()
+    {
+        Config::shouldReceive('get')->once()->with('sms-service-with-bd-providers::config.providers.'.Client::PROVIDER_BULK_SMS_BD)->andReturn(array_get($this->config, 'providers.'.Client::PROVIDER_BULK_SMS_BD));
+
+        $messageBag = new MessageBag();
+
+        Validator::shouldReceive('make')->once()->andReturn(Mockery::mock(['fails' => false, 'messages' => $messageBag]));
+
+        $provider = new Client(Client::getProvider(Client::PROVIDER_BULK_SMS_BD));
+        $result = $provider->send('01914886226', 'Alhamdulillah!');
+
+        $this->assertArrayHasKey('summary', $result);
+        $this->assertArrayHasKey('log', $result);
+        $this->assertEquals($result['summary']['sent'], $result['summary']['total']);
+    }
 }
