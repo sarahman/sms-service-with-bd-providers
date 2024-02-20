@@ -2,9 +2,17 @@
 
 namespace Sarahman\SmsService;
 
-use Illuminate\Contracts\Support\Arrayable;
+if (interface_exists('\\Illuminate\\Support\\Contracts\\ArrayableInterface')) {
+    interface BaseArrayableInterface extends \Illuminate\Support\Contracts\ArrayableInterface
+    {
+    }
+} else {
+    interface BaseArrayableInterface extends \Illuminate\Contracts\Support\Arrayable
+    {
+    }
+}
 
-class Response implements Arrayable
+class Response implements BaseArrayableInterface
 {
     /**
      * Returns the status of the response as boolean.
