@@ -3,7 +3,7 @@
     "description": "SMS Gateway service library in PHP. Multiple providers of Bangladesh in one library",
     "keywords": ["sms", "gateway", "service", "providers", "framework", "laravel", "lumen"],
     "type": "library",
-    "version": "2.0.0",
+    "version": "1.0.4",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,

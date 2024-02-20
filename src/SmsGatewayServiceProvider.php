@@ -2,8 +2,8 @@
 
 namespace Sarahman\SmsService;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
 class SmsGatewayServiceProvider extends ServiceProvider
 {
@@ -35,6 +35,7 @@ class SmsGatewayServiceProvider extends ServiceProvider
         } else {
             $provider = '\Sarahman\SmsService\ServiceProviderForLaravelRecent';
         }
+
         return new $provider($this->app);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Sarahman\SmsService;
 
 use Illuminate\Support\ServiceProvider;
@@ -9,7 +10,7 @@ class ServiceProviderForLaravelRecent extends ServiceProvider
     {
         // Publishes the configuration file
         $this->publishes([
-            __DIR__ . '/config/config.php' => config_path('sms-service.php'),
+            __DIR__.'/config/config.php' => config_path('sms-service.php'),
         ], 'config');
     }
 
@@ -17,7 +18,7 @@ class ServiceProviderForLaravelRecent extends ServiceProvider
     {
         // Merges default configuration
         $this->mergeConfigFrom(
-            __DIR__ . '/config/config.php',
+            __DIR__.'/config/config.php',
             'sms-service'
         );
     }

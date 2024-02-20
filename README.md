@@ -75,6 +75,12 @@ return [
             'MsgType' => 'TEXT',
             'masking' => 'S.H.P.L',
         ],
+        Client::PROVIDER_BULK_SMS_BD => [
+            'url'      => 'http://bulksmsbd.net/api/smsapi',
+            'api_key'  => '',
+            'senderid' => '',
+            'type'     => 'text',
+        ],
         Client::PROVIDER_ELITBUZZ => [
             'url' => 'https://msg.elitbuzz-bd.com/smsapi',
             'api_key' => '',
@@ -168,6 +174,7 @@ try {
 - [Banglalink SMS Service, Bangladesh](https://www.banglalinkgsm.com)
 - [BD Web Host 24 SMS Service, Bangladesh](https://www.bdwebhost24.com)
 - [BoomCast, Bangladesh](https://www.boomcast.io)
+- [BulkSmsBD, MobileView Plus, Bangladesh](https://bulksmsbd.com)
 - [Elitbuzz Technologies Ltd., Bangladesh](https://elitbuzz-bd.com)
 - [Grameenphone Limited, Bangladesh](https://www.grameenphone.com/business/enterprise-solutions/messaging)
 - [NovoCom Limited, Bangladesh](https://www.novocom-bd.com)
