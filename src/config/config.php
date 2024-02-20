@@ -27,6 +27,12 @@ return [
             'MsgType'  => 'TEXT',
             'masking'  => 'S.H.P.L',
         ],
+        Client::PROVIDER_BULK_SMS_BD => [
+            'url'      => 'http://bulksmsbd.net/api/smsapi',
+            'api_key'  => '',
+            'senderid' => '',
+            'type'     => 'text',
+        ],
         Client::PROVIDER_ELITBUZZ => [
             'url'      => 'https://msg.elitbuzz-bd.com/smsapi',
             'api_key'  => '',

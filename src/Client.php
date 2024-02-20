@@ -18,6 +18,7 @@ class Client
     const PROVIDER_BANGLALINK = Providers\Banglalink::class;
     const PROVIDER_BD_WEB_HOST_24 = Providers\BdWebHost24::class;
     const PROVIDER_BOOM_CAST = Providers\BoomCast::class;
+    const PROVIDER_BULK_SMS_BD = Providers\BulkSmsBd::class;
     const PROVIDER_ELITBUZZ = Providers\Elitbuzz::class;
     const PROVIDER_GRAMEENPHONE = Providers\Grameenphone::class;
     const PROVIDER_NOVOCOM = Providers\Novocom::class;
@@ -50,6 +51,7 @@ class Client
             case self::PROVIDER_BANGLALINK:
             case self::PROVIDER_BD_WEB_HOST_24:
             case self::PROVIDER_BOOM_CAST:
+            case self::PROVIDER_BULK_SMS_BD:
             case self::PROVIDER_ELITBUZZ:
             case self::PROVIDER_GRAMEENPHONE:
             case self::PROVIDER_NOVOCOM:
