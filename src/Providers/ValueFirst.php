@@ -4,9 +4,9 @@ namespace Sarahman\SmsService\Providers;
 
 use Exception;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Sarahman\HttpRequestApiLog\Traits\WritesHttpLogs;
+use Sarahman\SmsService\Helper;
 use Sarahman\SmsService\Interfaces\NeedsAuthenticationInterface;
 use Sarahman\SmsService\Response;
 use Sarahman\SmsService\Traits\Guzzles;
@@ -19,7 +19,7 @@ class ValueFirst extends BaseProvider implements NeedsAuthenticationInterface
     public function __construct(array $config = [], $url = null)
     {
         parent::__construct($config, $url);
-        $this->enableLogging = Config::get('sms-service-with-bd-providers::config.enable_api_call_logging', false);
+        $this->enableLogging = Helper::getConfig('enable_api_call_logging', false);
     }
 
     public function getUrl()

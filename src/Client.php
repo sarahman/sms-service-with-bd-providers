@@ -4,7 +4,6 @@ namespace Sarahman\SmsService;
 
 use Exception;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Sarahman\HttpRequestApiLog\Traits\WritesHttpLogs;
@@ -33,7 +32,7 @@ class Client
     public function __construct(ProviderInterface $provider)
     {
         $this->provider = $provider;
-        $this->enableLogging = Config::get('sms-service-with-bd-providers::config.enable_api_call_logging', false);
+        $this->enableLogging = Helper::getConfig('enable_api_call_logging', false);
     }
 
     /**
