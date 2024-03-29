@@ -101,7 +101,7 @@ class Client
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
                 $log['failed'][$recipient] = (new Response(false, $errorMessage))->toArray();
 
-                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $e->getMessage()));
             }
         }
 
@@ -168,7 +168,7 @@ class Client
                 $errorMessage = 422 != $errorCode ? $e->getMessage() : json_decode($e->getMessage(), true);
                 $log['failed'][$recipient] = (new Response(false, $errorMessage))->toArray();
 
-                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $errorMessage));
+                $this->log('POST', $options['url'], $options, new GuzzleResponse($errorCode, [], $e->getMessage()));
             }
         }
 
