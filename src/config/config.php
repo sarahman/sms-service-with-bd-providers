@@ -87,4 +87,5 @@ return [
         ],
     ],
     'enable_api_call_logging' => false,
+    'timeout' => 30,
 ];

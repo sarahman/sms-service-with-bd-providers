@@ -185,7 +185,7 @@ class Client
     private function prepareOptionsForProvider(array $data)
     {
         $options = [
-            'timeout' => 30,
+            'timeout' => Helper::getConfig('timeout', 30),
         ];
 
         switch(get_class($this->provider)) {
